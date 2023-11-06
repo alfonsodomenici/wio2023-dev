@@ -7,7 +7,7 @@ class TestingConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG=True
-
+    SQLALCHEMY_DATABASE_URI = "sqlite:///wio.db" 
 class ProductionConfig(Config):
     DEBUG=False
 
