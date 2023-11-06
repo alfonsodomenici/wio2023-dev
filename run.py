@@ -4,4 +4,4 @@ from src.app import create_app
 
 app = create_app('default')
 
-from src.app.models import Wio
+from src.app.models import Wio, WioData
