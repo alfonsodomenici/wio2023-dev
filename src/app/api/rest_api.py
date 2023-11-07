@@ -45,7 +45,7 @@ def delete():
     db.session.commit()
     return "", 204
 
-@api.route('/wios/<int:id>/data', methods=['POST'])
+@api.route('/wios/data', methods=['POST'])
 @jwt_required()
 def add_data():
     wio = db.get_or_404(Wio,get_jwt_identity())
