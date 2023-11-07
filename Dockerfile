@@ -13,7 +13,8 @@ RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 
 COPY src src
-#COPY migrations migrations
+COPY migrations migrations
+
 COPY run.py boot.sh ./
 
 # run-time configuration
