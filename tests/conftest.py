@@ -1,4 +1,4 @@
-from src.app import create_app
+from src.app import create_app, db as database
 import pytest
 
 @pytest.fixture
@@ -10,3 +10,15 @@ def app():
 def client(app):
     return app.test_client()
 
+@pytest.fixture()
+def db(app,request):
+    database.drop_all()
+    database.create_all()
+    database.session.commit()
+
+    def fin():
+        database.session.remove()
+
+    request.addfinalizer(fin)
+
+    return database

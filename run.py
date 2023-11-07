@@ -5,8 +5,11 @@ from src.app import create_app
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
-
 @app.cli.command()
 def deploy():
     """Run deployment tasks."""
     pass
+
+
+from src.app.models import Wio, WioData
+
