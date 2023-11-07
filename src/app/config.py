@@ -1,5 +1,9 @@
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 class Config:
-    SECRET_KEY = 'my secret..'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'my secret..'
     TESTING=False
     JSON_SORT_KEYS=False   
     
@@ -11,15 +15,17 @@ class Config:
     
 class TestingConfig(Config):
     TESTING=True
-    SQLALCHEMY_DATABASE_URI = "sqlite://"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or "sqlite://"
 
 class DevelopmentConfig(Config):
     DEBUG=True
-    #SQLALCHEMY_DATABASE_URI = "sqlite:///wio.db" 
-    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://wio2023:wio2023@localhost:3306/wio2023"
+    #SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or "sqlite:///wio.db" 
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+        "mysql+mysqlconnector://wio2023:wio2023@localhost:3306/wio2023"
 class ProductionConfig(Config):
     DEBUG=False
-
+    SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URL') or \
+        "mysql+mysqlconnector://wio2023:wio2023@localhost:3306/wio2023"
 class DockerConfig(ProductionConfig):
 
     @classmethod
