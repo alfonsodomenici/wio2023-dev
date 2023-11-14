@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "b953a987-5167-440c-a699-855a14963a31",
+		"name": "wio2023",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "413637"
+	},
+	"item": [
+		{
+			"name": "wio2023.tssdev.it/api/wios",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "wio2023.tssdev.it/api/wios",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view wio data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "wio2023.tssdev.it/api/wios/data",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view wio info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "wio2023.tssdev.it/api/wios/info",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view wio stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "wio2023.tssdev.it/api/wios/data/stats",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios",
+						"data",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth wio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"macaddress\":\"xx-yy-zz\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wio2023.tssdev.it/api/wios/auth",
+					"protocol": "https",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post wio data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"temperatura\",\n    \"value\":38\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wio2023.tssdev.it/api/wios/data",
+					"protocol": "https",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view all wio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "wio2023.tssdev.it/api/wios",
+					"host": [
+						"wio2023",
+						"tssdev",
+						"it"
+					],
+					"path": [
+						"api",
+						"wios"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTk1ODE5OSwianRpIjoiM2I3MTU4ZWQtNzBmNS00NjZjLTg1YTgtNTA2NmM3YmM4ZjllIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjk5OTU4MTk5LCJleHAiOjE2OTk5NTkwOTksIm1hY2FkZHJlc3MiOiJ4eC15eS16eiJ9.xVEenW6reOH7zeXu9oNaCpzcmka0-qnQxL6831nXr9g",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
