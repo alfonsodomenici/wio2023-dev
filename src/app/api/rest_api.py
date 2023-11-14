@@ -3,6 +3,7 @@ from src.app import db
 from src.app.models import Wio, WioData
 from http import HTTPStatus
 from flask_jwt_extended import create_access_token, jwt_required,get_jwt_identity
+from sqlalchemy import func, select
 
 api = Blueprint('api',__name__)
 
@@ -21,7 +22,7 @@ def auth():
     token = create_access_token(identity=wio.id,
         additional_claims=additional_claims)
 
-    return {'access-token': token}
+    return {'access_token': token}
 
 @api.route('/wios', methods=['POST'])
 def registration():
@@ -36,6 +37,12 @@ def registration():
 @api.route('/wios')
 def all():
     return [wio.to_json_slice() for wio in Wio.query.all()] 
+
+@api.route('/wios/info')
+@jwt_required()
+def find():
+    wio = db.get_or_404(Wio,get_jwt_identity())
+    return wio.to_json(), 200
 
 @api.route('/wios', methods=['DELETE'])
 @jwt_required()
@@ -55,7 +62,7 @@ def add_data():
         id_wio=wio.id)
     db.session.add(data)
     db.session.commit()
-    return data.to_json()
+    return data.to_json(),201
 
 @api.route('/wios/data', methods=['GET'])
 @jwt_required()
@@ -63,3 +70,14 @@ def view_data():
     wio = db.get_or_404(Wio,get_jwt_identity())
     result = WioData.query.filter_by(id_wio=wio.id).all()
     return [data.to_json() for data in result]
+
+@api.route('/wios/data/stats', methods=['GET'])
+@jwt_required()
+def view_stats():
+    result = db.session.execute(
+        select(WioData.type, 
+               func.min(WioData.value).label('min'),
+               func.max(WioData.value).label('max'),
+               func.avg(WioData.value).label('avg'))
+        .group_by(WioData.type)).all()
+    return [row._asdict() for row in result]
