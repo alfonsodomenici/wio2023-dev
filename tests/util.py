@@ -1,6 +1,9 @@
 from flask import url_for
 
-def register_wio(test_client,wio,macaddress,code):
+def register_wio(test_client,
+    wio=None,
+    macaddress=None,
+    code=None):
     return test_client.post(
         url_for('api.registration'),json={
             'wio':wio,

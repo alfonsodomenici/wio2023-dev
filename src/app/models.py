@@ -1,16 +1,26 @@
 from datetime import datetime
 from src.app import db
-
+from .exceptions import ValidationError
 class Wio(db.Model):
     __tablename__ = 'wio'
     id = db.Column(db.Integer, primary_key=True)
     wio = db.Column(db.String(45), nullable=False, default='wio terminal')
-    macaddress = db.Column(db.String(45), unique=True)
+    macaddress = db.Column(db.String(45),
+        nullable=False, 
+        unique=True)
     code = db.Column(db.String(45), nullable=False)
 
     @staticmethod
     def from_json(json):
-        pass 
+        if json.get('wio') is None:
+            raise ValidationError('wio is empty')
+        if json.get('macaddress') is None:
+            raise ValidationError('macaddress is empty')
+        if json.get('code') is None:
+            raise ValidationError('code is empty')
+        return Wio(wio=json.get('wio'),
+            macaddress=json.get('macaddress'),
+            code=json.get('code'))
 
     def to_json(self):
         return {

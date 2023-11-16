@@ -27,9 +27,7 @@ def auth():
 @api.route('/wios', methods=['POST'])
 def registration():
     json = request.get_json()
-    wio = Wio(wio=json.get('wio'),
-        macaddress=json.get('macaddress'),
-        code=json.get('code'))
+    wio = Wio.from_json(json)
     db.session.add(wio)
     db.session.commit()
     return wio.to_json(),201
@@ -81,3 +79,5 @@ def view_stats():
                func.avg(WioData.value).label('avg'))
         .group_by(WioData.type)).all()
     return [row._asdict() for row in result]
+
+from . import errors
